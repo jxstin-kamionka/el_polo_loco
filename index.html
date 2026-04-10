@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>El Pollo Loco</title>
+    <link rel="icon" type="image/png" href="./assets/icon.png" />
+
+    <script src="./models/keyboard.class.js"></script>
+    <script src="./models/mobile-controls.class.js"></script>
+    <script src="./models/drawable-object.class.js"></script>
+    <script src="./models/status-bar.class.js"></script>
+    <script src="./models/bottle-status-bar.class.js"></script>
+    <script src="./models/coin-status-bar.class.js"></script>
+    <script src="./models/status-boss-bar.class.js"></script>
+    <script src="./models/movable-objects.class.js"></script>
+    <script src="./models/chicken.class.js"></script>
+    <script src="./models/small-chicken.class.js"></script>
+    <script src="./models/character.class.js"></script>
+    <script src="./models/cloud.class.js"></script>
+    <script src="./models/background-object.class.js"></script>
+    <script src="./models/endboss.class.js"></script>
+    <script src="./models/gameend.class.js"></script>
+    <script src="./models/level.class.js"></script>
+    <script src="./models/throwable-objekt.class.js"></script>
+    <script src="./models/coin.class.js"></script>
+    <script src="./models/bottle.class.js"></script>
+    <script src="./models/world.class.js"></script>
+    <script src="./models/sounds.class.js"></script>
+    <script src="./models/orientation-check.class.js"></script>
+
+    <script src="./levels/level1.js"></script>
+    <script src="./js/game.js"></script>
+
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+
+  <body onload="init()">
+    <div id="rotateScreen" class="rotate-screen">
+      <p>📱 Bitte drehe dein Gerät ins Querformat</p>
+    </div>
+    <div class="game-container" id="gameContainer">
+      <canvas id="canvas" width="750" height="480"></canvas>
+
+      <div class="mobile-navigation">
+        <div class="nav-btn-left">
+          <button class="nav-btn" id="btn-left"></button>
+          <button class="nav-btn" id="btn-right"></button>
+        </div>
+        <div class="nav-btn-right">
+          <button class="nav-btn" id="btn-jump"></button>
+          <button class="nav-btn" id="btn-throw"></button>
+        </div>
+      </div>
+
+      <div id="startScreen" class="start-screen">
+        <div class="menu-box" id="menu-box">
+          <div class="menu-buttons">
+            <button
+              title="Start"
+              class="menu-btn"
+              id="btn-start"
+              onclick="startGame()"
+            ></button>
+
+            <button
+              title="Ton"
+              class="menu-btn"
+              id="btn-ton"
+              onclick="toggleSound()"
+            ></button>
+
+            <button
+              title="Anleitung"
+              class="menu-btn"
+              id="btn-anleitung"
+              onclick="toggleInstructions()"
+            ></button>
+
+            <button
+              title="Impressum"
+              class="menu-btn"
+              id="btn-impressum"
+              onclick="toggleImprint()"
+            ></button>
+
+            <button
+              title="Vollbild"
+              class="menu-btn"
+              id="btn-fullscreen"
+              onclick="toggleFullscreen()"
+            ></button>
+          </div>
+
+          <div id="instructionsPanel" class="info-panel hidden">
+            <h3>Spielanleitung</h3>
+            <p><strong>Pfeil links / rechts:</strong> Laufen</p>
+            <p><strong>Leertaste:</strong> Springen</p>
+            <p><strong>D:</strong> Flasche werfen</p>
+            <p>
+              <strong>Ziel:</strong> Sammle Münzen und Flaschen, besiege Hühner
+              und den Endboss.
+            </p>
+            <p>
+              <strong>Tipp:</strong> Kleine und normale Hühner kannst du auch
+              von oben besiegen.
+            </p>
+          </div>
+
+          <div id="imprintPanel" class="info-panel hidden">
+            <h3>Impressum</h3>
+            <p>Justin Kamionka</p>
+            <p>Goldbachstraße 4</p>
+            <p>97688 Bad Kissingen</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
