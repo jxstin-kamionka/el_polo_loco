@@ -1,9 +1,4 @@
 class gameEnd extends DrawableObject {
-  IMAGES_GAMEOVER = [
-    "../assets/img/You won, you lost/Game over A.png",
-    "../assets/img/You won, you lost/You lost b.png",
-  ];
-
   IMAGES_YOUWIN = [
     "../assets/img/You won, you lost/You win B.png",
     "../assets/img/You won, you lost/You won A.png",
@@ -18,12 +13,6 @@ class gameEnd extends DrawableObject {
     this.y = 0;
     this.width = 750;
     this.height = 480;
-
-    this.showGameOver();
-  }
-
-  showGameOver() {
-    this.img = this.imageCache[this.IMAGES_GAMEOVER[0]];
   }
 
   showYouWin() {

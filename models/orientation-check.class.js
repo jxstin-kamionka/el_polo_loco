@@ -8,11 +8,15 @@ class OrientationCheck {
     window.addEventListener("orientationchange", () => this.check());
   }
 
-  check() {
-    const isMobile = window.innerWidth < 1450;
-    const isPortrait = window.innerHeight > window.innerWidth;
+  isTouchDevice() {
+    return navigator.maxTouchPoints > 0 || "ontouchstart" in window;
+  }
 
-    if (isMobile && isPortrait) {
+  check() {
+    if (!this.isTouchDevice()) return;
+
+    const isPortrait = window.innerHeight > window.innerWidth;
+    if (isPortrait) {
       this.show();
     } else {
       this.hide();
@@ -20,24 +24,13 @@ class OrientationCheck {
   }
 
   show() {
-    if (this.overlay) {
-      this.overlay.style.display = "flex";
-      this.canvas.style.display = "none";
-    }
-
-    if (world) {
-      world.stop();
-    }
+    if (this.overlay) this.overlay.style.display = "flex";
+    if (this.canvas) this.canvas.style.display = "none";
+    if (world) world.stop();
   }
 
   hide() {
-    if (this.overlay) {
-      this.overlay.style.display = "none";
-      this.canvas.style.display = "block";
-    }
-
-    if (world && !world.isRunning) {
-      world.run();
-    }
+    if (this.overlay) this.overlay.style.display = "none";
+    if (this.canvas) this.canvas.style.display = "block";
   }
 }

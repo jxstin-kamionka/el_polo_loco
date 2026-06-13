@@ -6,7 +6,9 @@ class Endboss extends MovableObjects {
   isDeadFlag = false;
   isHurtFlag = false;
   isActivated = false;
-  speed = 0.5;
+  speed = 2.5;
+  moveInterval = null;
+  animInterval = null;
 
   offset = {
     top: 50,
@@ -27,26 +29,26 @@ class Endboss extends MovableObjects {
   ];
 
   IMAGES_WALKING = [
-    "assets/img/4_enemie_boss_chicken/3_attack/G13.png",
-    "assets/img/4_enemie_boss_chicken/3_attack/G14.png",
-    "assets/img/4_enemie_boss_chicken/3_attack/G15.png",
-    "assets/img/4_enemie_boss_chicken/3_attack/G16.png",
-    "assets/img/4_enemie_boss_chicken/3_attack/G17.png",
-    "assets/img/4_enemie_boss_chicken/3_attack/G18.png",
-    "assets/img/4_enemie_boss_chicken/3_attack/G19.png",
-    "assets/img/4_enemie_boss_chicken/3_attack/G20.png",
+    "../assets/img/4_enemie_boss_chicken/3_attack/G13.png",
+    "../assets/img/4_enemie_boss_chicken/3_attack/G14.png",
+    "../assets/img/4_enemie_boss_chicken/3_attack/G15.png",
+    "../assets/img/4_enemie_boss_chicken/3_attack/G16.png",
+    "../assets/img/4_enemie_boss_chicken/3_attack/G17.png",
+    "../assets/img/4_enemie_boss_chicken/3_attack/G18.png",
+    "../assets/img/4_enemie_boss_chicken/3_attack/G19.png",
+    "../assets/img/4_enemie_boss_chicken/3_attack/G20.png",
   ];
 
   IMAGES_HIT = [
-    "assets/img/4_enemie_boss_chicken/4_hurt/G21.png",
-    "assets/img/4_enemie_boss_chicken/4_hurt/G22.png",
-    "assets/img/4_enemie_boss_chicken/4_hurt/G23.png",
+    "../assets/img/4_enemie_boss_chicken/4_hurt/G21.png",
+    "../assets/img/4_enemie_boss_chicken/4_hurt/G22.png",
+    "../assets/img/4_enemie_boss_chicken/4_hurt/G23.png",
   ];
 
   IMAGES_DEAD = [
-    "assets/img/4_enemie_boss_chicken/5_dead/G24.png",
-    "assets/img/4_enemie_boss_chicken/5_dead/G25.png",
-    "assets/img/4_enemie_boss_chicken/5_dead/G26.png",
+    "../assets/img/4_enemie_boss_chicken/5_dead/G24.png",
+    "../assets/img/4_enemie_boss_chicken/5_dead/G25.png",
+    "../assets/img/4_enemie_boss_chicken/5_dead/G26.png",
   ];
 
   constructor() {
@@ -61,39 +63,31 @@ class Endboss extends MovableObjects {
   }
 
   animate() {
-    setInterval(() => {
-      this.updateMovement();
+    this.moveInterval = setInterval(() => {
+      if (isPaused) return;
+      if (this.isActivated && !this.isDeadFlag) this.moveLeft();
     }, 1000 / 60);
 
-    setInterval(() => {
+    this.animInterval = setInterval(() => {
       this.playBossAnimation();
-    }, 200);
+    }, 100);
   }
 
-  updateMovement() {
-    if (!this.isActivated) return;
-    if (this.isDeadFlag) return;
-
-    this.moveLeft();
+  stop() {
+    if (this.moveInterval) { clearInterval(this.moveInterval); this.moveInterval = null; }
+    if (this.animInterval) { clearInterval(this.animInterval); this.animInterval = null; }
   }
 
   playBossAnimation() {
     if (this.isDeadFlag) {
       this.playAnimation(this.IMAGES_DEAD);
-      return;
-    }
-
-    if (this.isHurtFlag) {
+    } else if (this.isHurtFlag) {
       this.playAnimation(this.IMAGES_HIT);
-      return;
-    }
-
-    if (this.isActivated) {
+    } else if (this.isActivated) {
       this.playAnimation(this.IMAGES_WALKING);
-      return;
+    } else {
+      this.playAnimation(this.IMAGES_ALERT);
     }
-
-    this.playAnimation(this.IMAGES_ALERT);
   }
 
   activate() {
@@ -102,33 +96,22 @@ class Endboss extends MovableObjects {
 
   takeDamage(amount) {
     if (this.isDeadFlag) return;
-
-    this.energy -= amount;
-
-    if (this.energy < 0) {
-      this.energy = 0;
-    }
-
+    this.energy = Math.max(0, this.energy - amount);
     if (this.energy === 0) {
       this.die();
-      return;
+    } else {
+      this.showHitAnimation();
     }
-
-    this.showHitAnimation();
   }
 
   showHitAnimation() {
     this.isHurtFlag = true;
-
-    setTimeout(() => {
-      this.isHurtFlag = false;
-    }, 400);
+    setTimeout(() => { this.isHurtFlag = false; }, 400);
   }
 
   die() {
     this.isDeadFlag = true;
     this.isHurtFlag = false;
-
     setTimeout(() => {
       this.removeFromWorld = true;
       youWin = true;

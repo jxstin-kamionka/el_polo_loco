@@ -5,36 +5,47 @@ class MovableObjects extends DrawableObject {
   otherDirection = false;
   energy = 100;
   lastHit = 0;
+  gravityInterval = null;
 
   applyGravity() {
-    setInterval(() => {
+    this.gravityInterval = setInterval(() => {
+      if (isPaused) return;
       if (this.isAboveGround() || this.speedY > 0) {
         this.y -= this.speedY;
         this.speedY -= this.acceleration;
       }
+      // Snap non-throwable objects to the exact ground line to prevent float variation
+      if (!(this instanceof ThrowableObject) && !this.isAboveGround() && this.speedY <= 0) {
+        this.y = 240;
+        this.speedY = 0;
+      }
     }, 1000 / 25);
   }
 
-  isAboveGround() {
-    if (this instanceof ThrowableObject) {
-      return true;
-    } else {
-      return this.y < 240;
+  stopGravity() {
+    if (this.gravityInterval) {
+      clearInterval(this.gravityInterval);
+      this.gravityInterval = null;
     }
+  }
+
+  isAboveGround() {
+    if (this instanceof ThrowableObject) return true;
+    return this.y < 240;
   }
 
   moveRight() {
     this.x += this.speed;
     this.otherDirection = false;
   }
+
   moveLeft() {
     this.x -= this.speed;
   }
 
   playAnimation(images) {
     let i = this.currentImage % images.length;
-    let path = images[i];
-    this.img = this.imageCache[path];
+    this.img = this.imageCache[images[i]];
     this.currentImage++;
   }
 
@@ -47,23 +58,18 @@ class MovableObjects extends DrawableObject {
     );
   }
 
-  hit() {
-    this.energy -= 1;
-    console.log(this.energy);
-    if (this.energy < 0) {
-      this.energy = 0;
-    } else {
-      this.lastHit = new Date().getTime();
+  hit(amount = 1) {
+    this.energy = Math.max(0, this.energy - amount);
+    if (this.energy > 0) {
+      this.lastHit = Date.now();
     }
   }
 
   isHurt() {
-    let timepassed = new Date().getTime() - this.lastHit;
-    timepassed = timepassed / 1000;
-    return timepassed < 1;
+    return (Date.now() - this.lastHit) / 1000 < 1;
   }
 
   isDead() {
-    return this.energy == 0;
+    return this.energy === 0;
   }
 }

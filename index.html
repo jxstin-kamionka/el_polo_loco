@@ -1,8 +1,8 @@
 <!doctype html>
-<html lang="de">
+<html lang="de" translate="no">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0" />
     <title>El Pollo Loco</title>
     <link rel="icon" type="image/png" href="./assets/icon.png" />
 
@@ -42,6 +42,19 @@
     <div class="game-container" id="gameContainer">
       <canvas id="canvas" width="750" height="480"></canvas>
 
+      <button id="btn-pause" class="game-ctrl-btn hidden" title="Pause" onclick="pauseGame()"></button>
+
+      <div id="pauseOverlay" class="pause-overlay hidden">
+        <div class="pause-box">
+          <h2 class="pause-title">Pause</h2>
+          <button id="btn-mute-pause" class="pause-sound-btn" onclick="toggleSound()">
+            Ton: <span id="pause-sound-state">Aus</span>
+          </button>
+          <button class="pause-action-btn" onclick="resumeGame()">Weiter</button>
+          <button class="pause-action-btn" onclick="returnToStartScreen()">Hauptmenü</button>
+        </div>
+      </div>
+
       <div class="mobile-navigation">
         <div class="nav-btn-left">
           <button class="nav-btn" id="btn-left"></button>
@@ -50,6 +63,14 @@
         <div class="nav-btn-right">
           <button class="nav-btn" id="btn-jump"></button>
           <button class="nav-btn" id="btn-throw"></button>
+        </div>
+      </div>
+
+      <div id="gameEndOverlay" class="game-end-overlay hidden">
+        <img id="gameEndImage" class="game-end-image" src="" alt="" />
+        <div class="game-end-buttons">
+          <button class="end-btn" onclick="restartGame()">Neustart</button>
+          <button class="end-btn" onclick="returnToStartScreen()">Hauptmenü</button>
         </div>
       </div>
 
