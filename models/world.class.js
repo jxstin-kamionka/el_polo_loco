@@ -253,11 +253,12 @@ class World {
   }
 
   getBottleStartX() {
-    return this.character.otherDirection ? this.character.x : this.character.x + 100;
+    // Arm is at ~x+20 when facing left (flipped sprite), ~x+60 when facing right
+    return this.character.otherDirection ? this.character.x + 20 : this.character.x + 60;
   }
 
   getBottleStartY() {
-    return this.character.y + 80;
+    return this.character.y + 90;
   }
 
   updateBottleBarAfterThrow() {

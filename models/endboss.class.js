@@ -6,7 +6,7 @@ class Endboss extends MovableObjects {
   isDeadFlag = false;
   isHurtFlag = false;
   isActivated = false;
-  speed = 2.5;
+  speed = 1.2;
   moveInterval = null;
   animInterval = null;
 
