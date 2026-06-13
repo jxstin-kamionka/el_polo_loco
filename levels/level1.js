@@ -47,17 +47,22 @@ function placeSmallChicken(enemies, minX, maxX) {
 }
 
 // ─── Bottles ─────────────────────────────────────────────────────────────────
-// 7 Flaschen: je 2 in Zone 1+2, 3 in Zone 3 (für den Boss)
+// 12 Flaschen gleichmäßig über das Level verteilt, mehr Cluster vor dem Boss
 
 function createBottles() {
   const zones = [
-    [300, 500],
-    [700, 900],
-    [1100, 1300],
-    [1400, 1600],
-    [1650, 1800],
-    [1800, 1950],
-    [1950, 2100],
+    [280, 420],
+    [500, 650],
+    [750, 900],
+    [950, 1100],
+    [1150, 1300],
+    [1350, 1500],
+    [1500, 1620],
+    [1620, 1750],
+    [1750, 1870],
+    [1870, 1980],
+    [1980, 2080],
+    [2080, 2150],
   ];
   return zones.map(([min, max]) => new Bottle(min + Math.random() * (max - min)));
 }
