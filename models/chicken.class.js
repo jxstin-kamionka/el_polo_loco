@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Standard walking chicken enemy.
  */
 class Chicken extends MovableObjects {
@@ -27,13 +27,13 @@ class Chicken extends MovableObjects {
 
   /** @type {string[]} Walking animation frames. */
   IMAGES_WALKING = [
-    "../assets/img/3_enemies_chicken/chicken_normal/1_walk/1_w.png",
-    "../assets/img/3_enemies_chicken/chicken_normal/1_walk/2_w.png",
-    "../assets/img/3_enemies_chicken/chicken_normal/1_walk/3_w.png",
+    "assets/img/3_enemies_chicken/chicken_normal/1_walk/1_w.png",
+    "assets/img/3_enemies_chicken/chicken_normal/1_walk/2_w.png",
+    "assets/img/3_enemies_chicken/chicken_normal/1_walk/3_w.png",
   ];
 
   /** @type {string} Dead sprite image. */
-  IMAGE_DEAD = "../assets/img/3_enemies_chicken/chicken_normal/2_dead/dead.png";
+  IMAGE_DEAD = "assets/img/3_enemies_chicken/chicken_normal/2_dead/dead.png";
 
   /**
    * Creates a chicken with randomized position and speed.

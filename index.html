@@ -33,16 +33,15 @@
     <script src="./models/orientation-check.class.js"></script>
 
     <script src="./levels/level1.js"></script>
-    <script src="./js/script.js"></script>
+    <script src="./script.js"></script>
 
-    <link rel="stylesheet" href="./css/style.css" />
-    <link rel="stylesheet" href="./css/difficulty.css" />
+    <link rel="stylesheet" href="./style.css" />
     <link rel="stylesheet" href="./css/mobile-controls.css" />
   </head>
 
   <body onload="init()">
     <div id="rotateScreen" class="rotate-screen">
-      <p>📱 Bitte drehe dein Gerät ins Querformat</p>
+      <p>Bitte drehe dein Ger&auml;t ins Querformat</p>
     </div>
     <div class="game-container" id="gameContainer">
       <canvas id="canvas" width="750" height="480"></canvas>
@@ -56,7 +55,7 @@
             Ton: <span id="pause-sound-state">Aus</span>
           </button>
           <button class="pause-action-btn" onclick="resumeGame()">Weiter</button>
-          <button class="pause-action-btn" onclick="returnToStartScreen()">Hauptmenü</button>
+          <button class="pause-action-btn" onclick="returnToStartScreen()">Hauptmen&uuml;</button>
         </div>
       </div>
 
@@ -75,7 +74,7 @@
         <img id="gameEndImage" class="game-end-image" src="" alt="" />
         <div class="game-end-buttons">
           <button class="end-btn" onclick="restartGame()">Neustart</button>
-          <button class="end-btn" onclick="returnToStartScreen()">Hauptmenü</button>
+          <button class="end-btn" onclick="returnToStartScreen()">Hauptmen&uuml;</button>
         </div>
       </div>
 
@@ -131,20 +130,34 @@
             <p><strong>Leertaste:</strong> Springen</p>
             <p><strong>D:</strong> Flasche werfen</p>
             <p>
-              <strong>Ziel:</strong> Sammle Münzen und Flaschen, besiege Hühner
+              <strong>Ziel:</strong> Sammle M&uuml;nzen und Flaschen, besiege H&uuml;hner
               und den Endboss.
             </p>
             <p>
-              <strong>Tipp:</strong> Kleine und normale Hühner kannst du auch
+              <strong>Tipp:</strong> Kleine und normale H&uuml;hner kannst du auch
               von oben besiegen.
             </p>
           </div>
 
           <div id="imprintPanel" class="info-panel hidden">
             <h3>Impressum</h3>
-            <p>Justin Kamionka</p>
-            <p>Goldbachstraße 4</p>
-            <p>97688 Bad Kissingen</p>
+            <p><strong>Angaben gem&auml;&szlig; &sect; 5 DDG</strong></p>
+            <p>
+              Justin Kamionka<br />
+              Goldbachstra&szlig;e 4<br />
+              97688 Bad Kissingen<br />
+              Deutschland
+            </p>
+            <p><strong>Kontakt</strong></p>
+            <p>
+              E-Mail: <a href="mailto:justinkamionka@icloud.com">justinkamionka@icloud.com</a>
+            </p>
+            <p><strong>Verantwortlich f&uuml;r den Inhalt nach &sect; 18 Abs. 2 MStV</strong></p>
+            <p>
+              Justin Kamionka<br />
+              Goldbachstra&szlig;e 4<br />
+              97688 Bad Kissingen
+            </p>
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Throwable salsa bottle that flies, rotates, splashes, and damages enemies.
  */
 class ThrowableObject extends MovableObjects {
@@ -25,20 +25,20 @@ class ThrowableObject extends MovableObjects {
 
   /** @type {string[]} Rotation animation frames. */
   IMAGES_ROTATION = [
-    "../assets/img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png",
-    "../assets/img/6_salsa_bottle/bottle_rotation/2_bottle_rotation.png",
-    "../assets/img/6_salsa_bottle/bottle_rotation/3_bottle_rotation.png",
-    "../assets/img/6_salsa_bottle/bottle_rotation/4_bottle_rotation.png",
+    "assets/img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png",
+    "assets/img/6_salsa_bottle/bottle_rotation/2_bottle_rotation.png",
+    "assets/img/6_salsa_bottle/bottle_rotation/3_bottle_rotation.png",
+    "assets/img/6_salsa_bottle/bottle_rotation/4_bottle_rotation.png",
   ];
 
   /** @type {string[]} Splash animation frames. */
   IMAGES_SPLASH = [
-    "../assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/1_bottle_splash.png",
-    "../assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/2_bottle_splash.png",
-    "../assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/3_bottle_splash.png",
-    "../assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/4_bottle_splash.png",
-    "../assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/5_bottle_splash.png",
-    "../assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png",
+    "assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/1_bottle_splash.png",
+    "assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/2_bottle_splash.png",
+    "assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/3_bottle_splash.png",
+    "assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/4_bottle_splash.png",
+    "assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/5_bottle_splash.png",
+    "assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png",
   ];
 
   /** @type {{top:number,bottom:number,left:number,right:number}} Collision offsets. */

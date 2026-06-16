@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Loads and controls all sound effects and background music.
  */
 class Sounds {
@@ -13,21 +13,21 @@ class Sounds {
 
   /** @type {Object.<string, HTMLAudioElement>} Available audio elements. */
   SOUNDS = {
-    walk: new Audio("../assets/audio/player/walk.mp3"),
-    jump: new Audio("../assets/audio/player/jump.mp3"),
-    hurt: new Audio("../assets/audio/player/player-hit.wav"),
-    coin: new Audio("../assets/audio/player/coin.mp3"),
-    throw: new Audio("../assets/audio/player/bottle.mp3"),
-    bottlePickup: new Audio("../assets/audio/player/bottle-pickup.mp3"),
-    dead: new Audio("../assets/audio/player/dead.mp3"),
+    walk: new Audio("assets/audio/player/walk.mp3"),
+    jump: new Audio("assets/audio/player/jump.mp3"),
+    hurt: new Audio("assets/audio/player/player-hit.wav"),
+    coin: new Audio("assets/audio/player/coin.mp3"),
+    throw: new Audio("assets/audio/player/bottle.mp3"),
+    bottlePickup: new Audio("assets/audio/player/bottle-pickup.mp3"),
+    dead: new Audio("assets/audio/player/dead.mp3"),
 
-    gameOver: new Audio("../assets/audio/world/gameover.mp3"),
-    youWin: new Audio("../assets/audio/world/winsound.mp3"),
-    background: new Audio("../assets/audio/world/background-musik.mp3"),
+    gameOver: new Audio("assets/audio/world/gameover.mp3"),
+    youWin: new Audio("assets/audio/world/winsound.mp3"),
+    background: new Audio("assets/audio/world/background-musik.mp3"),
 
-    chicken: new Audio("../assets/audio/enemies/chicken.mp3"),
-    endboss: new Audio("../assets/audio/enemies/big-chicken.mp3"),
-    deadenemie: new Audio("../assets/audio/enemies/dead.mp3"),
+    chicken: new Audio("assets/audio/enemies/chicken.mp3"),
+    endboss: new Audio("assets/audio/enemies/big-chicken.mp3"),
+    deadenemie: new Audio("assets/audio/enemies/dead.mp3"),
   };
 
   /**

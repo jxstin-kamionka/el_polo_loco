@@ -32,6 +32,12 @@ class World {
   /** @type {BossStatusBar} Boss health display. */
   bossStatusBar = new BossStatusBar();
 
+  /** @type {number} Total coins available when the level starts. */
+  totalCollectableCoins = 0;
+
+  /** @type {number} Total bottles available when the level starts. */
+  totalCollectableBottles = 0;
+
   /** @type {ThrowableObject[]} Bottles currently flying through the level. */
   throwableObjects = [];
 
@@ -71,9 +77,33 @@ class World {
 
     this.character = new Character();
     this.character.world = this;
+    this.assignWorldReferences();
+    this.initCollectableTotals();
 
     this.draw();
     this.run();
+  }
+
+  /**
+   * Gives level entities access to the active world state.
+   * @returns {void}
+   */
+  assignWorldReferences() {
+    this.level.enemies.forEach((enemy) => {
+      enemy.world = this;
+      if (typeof enemy.keepInsideLevel === "function") enemy.keepInsideLevel();
+    });
+  }
+
+  /**
+   * Stores level pickup totals and resets their status bars to empty.
+   * @returns {void}
+   */
+  initCollectableTotals() {
+    this.totalCollectableCoins = this.level.coins.length;
+    this.totalCollectableBottles = this.level.bottles.length;
+    this.coinStatusBar.setPercentage(0);
+    this.bottleStatusBar.setPercentage(0);
   }
 
   /**

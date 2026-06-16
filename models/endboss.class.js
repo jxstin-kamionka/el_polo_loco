@@ -29,6 +29,9 @@ class Endboss extends MovableObjects {
   /** @type {boolean} Whether the boss has been activated by proximity. */
   isActivated = false;
 
+  /** @type {?World} World that owns this boss. */
+  world = null;
+
   /** @type {number} Horizontal movement speed. */
   speed = 1.2;
 
@@ -48,40 +51,40 @@ class Endboss extends MovableObjects {
 
   /** @type {string[]} Alert animation frames. */
   IMAGES_ALERT = [
-    "../assets/img/4_enemie_boss_chicken/2_alert/G5.png",
-    "../assets/img/4_enemie_boss_chicken/2_alert/G6.png",
-    "../assets/img/4_enemie_boss_chicken/2_alert/G7.png",
-    "../assets/img/4_enemie_boss_chicken/2_alert/G8.png",
-    "../assets/img/4_enemie_boss_chicken/2_alert/G9.png",
-    "../assets/img/4_enemie_boss_chicken/2_alert/G10.png",
-    "../assets/img/4_enemie_boss_chicken/2_alert/G11.png",
-    "../assets/img/4_enemie_boss_chicken/2_alert/G12.png",
+    "assets/img/4_enemie_boss_chicken/2_alert/G5.png",
+    "assets/img/4_enemie_boss_chicken/2_alert/G6.png",
+    "assets/img/4_enemie_boss_chicken/2_alert/G7.png",
+    "assets/img/4_enemie_boss_chicken/2_alert/G8.png",
+    "assets/img/4_enemie_boss_chicken/2_alert/G9.png",
+    "assets/img/4_enemie_boss_chicken/2_alert/G10.png",
+    "assets/img/4_enemie_boss_chicken/2_alert/G11.png",
+    "assets/img/4_enemie_boss_chicken/2_alert/G12.png",
   ];
 
   /** @type {string[]} Walking and attack animation frames. */
   IMAGES_WALKING = [
-    "../assets/img/4_enemie_boss_chicken/3_attack/G13.png",
-    "../assets/img/4_enemie_boss_chicken/3_attack/G14.png",
-    "../assets/img/4_enemie_boss_chicken/3_attack/G15.png",
-    "../assets/img/4_enemie_boss_chicken/3_attack/G16.png",
-    "../assets/img/4_enemie_boss_chicken/3_attack/G17.png",
-    "../assets/img/4_enemie_boss_chicken/3_attack/G18.png",
-    "../assets/img/4_enemie_boss_chicken/3_attack/G19.png",
-    "../assets/img/4_enemie_boss_chicken/3_attack/G20.png",
+    "assets/img/4_enemie_boss_chicken/3_attack/G13.png",
+    "assets/img/4_enemie_boss_chicken/3_attack/G14.png",
+    "assets/img/4_enemie_boss_chicken/3_attack/G15.png",
+    "assets/img/4_enemie_boss_chicken/3_attack/G16.png",
+    "assets/img/4_enemie_boss_chicken/3_attack/G17.png",
+    "assets/img/4_enemie_boss_chicken/3_attack/G18.png",
+    "assets/img/4_enemie_boss_chicken/3_attack/G19.png",
+    "assets/img/4_enemie_boss_chicken/3_attack/G20.png",
   ];
 
   /** @type {string[]} Hurt animation frames. */
   IMAGES_HIT = [
-    "../assets/img/4_enemie_boss_chicken/4_hurt/G21.png",
-    "../assets/img/4_enemie_boss_chicken/4_hurt/G22.png",
-    "../assets/img/4_enemie_boss_chicken/4_hurt/G23.png",
+    "assets/img/4_enemie_boss_chicken/4_hurt/G21.png",
+    "assets/img/4_enemie_boss_chicken/4_hurt/G22.png",
+    "assets/img/4_enemie_boss_chicken/4_hurt/G23.png",
   ];
 
   /** @type {string[]} Death animation frames. */
   IMAGES_DEAD = [
-    "../assets/img/4_enemie_boss_chicken/5_dead/G24.png",
-    "../assets/img/4_enemie_boss_chicken/5_dead/G25.png",
-    "../assets/img/4_enemie_boss_chicken/5_dead/G26.png",
+    "assets/img/4_enemie_boss_chicken/5_dead/G24.png",
+    "assets/img/4_enemie_boss_chicken/5_dead/G25.png",
+    "assets/img/4_enemie_boss_chicken/5_dead/G26.png",
   ];
 
   /**
@@ -118,7 +121,7 @@ class Endboss extends MovableObjects {
   animate() {
     this.moveInterval = setInterval(() => {
       if (isPaused) return;
-      if (this.isActivated && !this.isDeadFlag) this.moveLeft();
+      if (this.isActivated && !this.isDeadFlag) this.followCharacter();
     }, 1000 / 60);
 
     this.animInterval = setInterval(() => {
@@ -158,11 +161,79 @@ class Endboss extends MovableObjects {
   }
 
   /**
+   * Moves the boss toward the character while staying inside the level.
+   * @returns {void}
+   */
+  followCharacter() {
+    const character = this.world?.character;
+    if (!character) return;
+
+    const bossLeft = this.x + this.offset.left;
+    const bossRight = this.x + this.width - this.offset.right;
+    const characterLeft = character.x + character.offset.left;
+    const characterRight = character.x + character.width - character.offset.right;
+
+    if (bossLeft > characterRight) {
+      this.moveLeft();
+    } else if (bossRight < characterLeft) {
+      this.moveRight();
+    }
+
+    this.keepInsideLevel();
+  }
+
+  /**
+   * Moves the boss right and mirrors the left-facing boss sprite.
+   * @returns {void}
+   */
+  moveRight() {
+    this.x += this.speed;
+    this.otherDirection = true;
+  }
+
+  /**
+   * Moves the boss left using the original left-facing boss sprite.
+   * @returns {void}
+   */
+  moveLeft() {
+    this.x -= this.speed;
+    this.otherDirection = false;
+  }
+
+  /**
+   * Keeps the boss fully inside the drawn level.
+   * @returns {void}
+   */
+  keepInsideLevel() {
+    this.x = Math.min(Math.max(this.x, 0), this.getLevelMaxX());
+  }
+
+  /**
+   * Calculates the rightmost x-position the boss may use.
+   * @returns {number} Maximum boss x-position.
+   */
+  getLevelMaxX() {
+    return Math.max(0, this.getLevelRightEdge() - this.width);
+  }
+
+  /**
+   * Reads the visible map width from background segments.
+   * @returns {number} Right edge of the drawn level.
+   */
+  getLevelRightEdge() {
+    const backgroundObjects = this.world?.level?.backgroundObjects || [];
+    if (backgroundObjects.length === 0) return this.world?.level?.level_end_x || 719 * 3;
+
+    return Math.max(...backgroundObjects.map((object) => object.x + object.width));
+  }
+
+  /**
    * Activates boss movement and attack animation.
    * @returns {void}
    */
   activate() {
     this.isActivated = true;
+    this.keepInsideLevel();
   }
 
   /**

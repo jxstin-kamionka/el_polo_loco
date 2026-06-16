@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Moving background cloud.
  */
 class Cloud extends MovableObjects {
@@ -18,7 +18,7 @@ class Cloud extends MovableObjects {
    */
   constructor() {
     super();
-    this.loadImage("../assets/img/5_background/layers/4_clouds/1.png");
+    this.loadImage("assets/img/5_background/layers/4_clouds/1.png");
     this.x = Math.random() * 2000;
     this.y = 20 + Math.random() * 100;
     this.height = 250;

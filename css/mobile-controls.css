@@ -28,14 +28,14 @@
 }
 
 #btn-left {
-  background-image: url(/assets/img/mobile_controller/arrow.png);
+  background-image: url("../assets/img/mobile_controller/arrow.png");
   background-size: 40px 40px;
   background-repeat: no-repeat;
   background-position: center;
 }
 
 #btn-right {
-  background-image: url(/assets/img/mobile_controller/arrow.png);
+  background-image: url("../assets/img/mobile_controller/arrow.png");
   background-size: 40px 40px;
   background-repeat: no-repeat;
   background-position: center;
@@ -43,14 +43,14 @@
 }
 
 #btn-jump {
-  background-image: url(/assets/img/mobile_controller/jumper.png);
+  background-image: url("../assets/img/mobile_controller/jumper.png");
   background-size: 40px 40px;
   background-repeat: no-repeat;
   background-position: center;
 }
 
 #btn-throw {
-  background-image: url(/assets/img/mobile_controller/werfen.png);
+  background-image: url("../assets/img/mobile_controller/werfen.png");
   background-size: 40px 40px;
   background-repeat: no-repeat;
   background-position: center;

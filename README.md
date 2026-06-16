@@ -75,8 +75,9 @@ cd el-pollo-loco
 el-pollo-loco/
 │
 ├── assets/            # Bilder, Sounds, Fonts
-├── css/               # Stylesheets
-├── js/                # Game Logik
+├── css/               # Mobile Stylesheet
+├── style.css          # Haupt-Stylesheet
+├── script.js          # Game Logik
 ├── models/            # Klassen (Character, World, etc.)
 ├── levels/            # Level Definitionen
 ├── index.html

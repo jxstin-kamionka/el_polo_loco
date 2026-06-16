@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Collectable coin pickup.
  */
 class Coin extends DrawableObject {
@@ -16,7 +16,7 @@ class Coin extends DrawableObject {
    */
   constructor(x) {
     super();
-    this.loadImage("../assets/img/8_coin/coin_1.png");
+    this.loadImage("assets/img/8_coin/coin_1.png");
     this.x = x;
     this.y = Math.random() * 200 + 180;
     this.width = 80;

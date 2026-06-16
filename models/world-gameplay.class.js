@@ -190,8 +190,36 @@ World.prototype.getBottleStartY = function () {
  * @returns {void}
  */
 World.prototype.updateBottleBarAfterThrow = function () {
-  this.bottleStatusBar.percentage = Math.max(0, this.bottleStatusBar.percentage - 20);
-  this.bottleStatusBar.setPercentage(this.bottleStatusBar.percentage);
+  this.updateBottleStatusBar();
+};
+
+/**
+ * Converts an item count into a status-bar percentage.
+ * @param {number} amount Current amount.
+ * @param {number} total Maximum amount.
+ * @returns {number} Percentage from 0 to 100.
+ */
+World.prototype.getCollectablePercentage = function (amount, total) {
+  if (total <= 0) return 0;
+  return (amount / total) * 100;
+};
+
+/**
+ * Synchronizes the coin bar with collected coins.
+ * @returns {void}
+ */
+World.prototype.updateCoinStatusBar = function () {
+  const percentage = this.getCollectablePercentage(this.character.coins, this.totalCollectableCoins);
+  this.coinStatusBar.setPercentage(percentage);
+};
+
+/**
+ * Synchronizes the bottle bar with the current bottle inventory.
+ * @returns {void}
+ */
+World.prototype.updateBottleStatusBar = function () {
+  const percentage = this.getCollectablePercentage(this.character.bottles, this.totalCollectableBottles);
+  this.bottleStatusBar.setPercentage(percentage);
 };
 
 /**
@@ -212,9 +240,8 @@ World.prototype.checkCoinCollision = function () {
  */
 World.prototype.collectCoin = function () {
   sounds.play("coin");
-  this.character.coins += 10;
-  this.coinStatusBar.percentage = Math.min(100, this.coinStatusBar.percentage + 10);
-  this.coinStatusBar.setPercentage(this.coinStatusBar.percentage);
+  this.character.coins += 1;
+  this.updateCoinStatusBar();
 };
 
 /**
@@ -236,8 +263,7 @@ World.prototype.checkBottleCollision = function () {
 World.prototype.collectBottle = function () {
   sounds.play("bottlePickup");
   this.character.bottles += 1;
-  this.bottleStatusBar.percentage = Math.min(100, this.bottleStatusBar.percentage + 20);
-  this.bottleStatusBar.setPercentage(this.bottleStatusBar.percentage);
+  this.updateBottleStatusBar();
 };
 
 /**

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Smaller walking chicken enemy with a faster animation.
  */
 class SmallChicken extends MovableObjects {
@@ -27,13 +27,13 @@ class SmallChicken extends MovableObjects {
 
   /** @type {string[]} Walking animation frames. */
   IMAGES_WALKING = [
-    "../assets/img/3_enemies_chicken/chicken_small/1_walk/1_w.png",
-    "../assets/img/3_enemies_chicken/chicken_small/1_walk/2_w.png",
-    "../assets/img/3_enemies_chicken/chicken_small/1_walk/3_w.png",
+    "assets/img/3_enemies_chicken/chicken_small/1_walk/1_w.png",
+    "assets/img/3_enemies_chicken/chicken_small/1_walk/2_w.png",
+    "assets/img/3_enemies_chicken/chicken_small/1_walk/3_w.png",
   ];
 
   /** @type {string} Dead sprite image. */
-  IMAGE_DEAD = "../assets/img/3_enemies_chicken/chicken_small/2_dead/dead.png";
+  IMAGE_DEAD = "assets/img/3_enemies_chicken/chicken_small/2_dead/dead.png";
 
   /**
    * Creates a small chicken with randomized position and speed.

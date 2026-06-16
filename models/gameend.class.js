@@ -1,17 +1,17 @@
-/**
+﻿/**
  * Drawable result-screen image helper.
  */
 class gameEnd extends DrawableObject {
   /** @type {string[]} Game-over images. */
   IMAGES_GAMEOVER = [
-    "../assets/img/You won, you lost/Game over A.png",
-    "../assets/img/You won, you lost/Game Over.png",
+    "assets/img/You won, you lost/Game over A.png",
+    "assets/img/You won, you lost/Game Over.png",
   ];
 
   /** @type {string[]} Win images. */
   IMAGES_YOUWIN = [
-    "../assets/img/You won, you lost/You win B.png",
-    "../assets/img/You won, you lost/You won A.png",
+    "assets/img/You won, you lost/You win B.png",
+    "assets/img/You won, you lost/You won A.png",
   ];
 
   /**

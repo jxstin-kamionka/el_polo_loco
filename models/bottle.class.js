@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Collectable salsa bottle pickup.
  */
 class Bottle extends DrawableObject {
@@ -16,7 +16,7 @@ class Bottle extends DrawableObject {
    */
   constructor(x) {
     super();
-    this.loadImage("../assets/img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png");
+    this.loadImage("assets/img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png");
     this.x = x;
     this.y = 350;
     this.width = 60;
