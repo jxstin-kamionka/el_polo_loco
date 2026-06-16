@@ -1,5 +1,10 @@
+/** @type {?Level} Active first level instance. */
 let level1;
 
+/**
+ * Recreates the first level with fresh enemies, pickups, clouds, and background.
+ * @returns {void}
+ */
 function initLevel1() {
   level1 = new Level(
     createEnemies(),
@@ -10,12 +15,10 @@ function initLevel1() {
   );
 }
 
-// ─── Enemies ─────────────────────────────────────────────────────────────────
-// Zone 1 (x 400–800):  2 normal chickens  — easy warm-up
-// Zone 2 (x 850–1400): 2 normal + 2 small — mid challenge
-// Zone 3 (x 1450–2050): 1 normal + 2 small — boss approach
-// x 2157: Endboss
-
+/**
+ * Creates all enemies for the level.
+ * @returns {MovableObjects[]} Enemy list including the boss.
+ */
 function createEnemies() {
   const enemies = [new Endboss()];
 
@@ -34,21 +37,36 @@ function createEnemies() {
   return enemies;
 }
 
+/**
+ * Adds a normal chicken at a random position inside a zone.
+ * @param {MovableObjects[]} enemies Enemy list to mutate.
+ * @param {number} minX Minimum x-position.
+ * @param {number} maxX Maximum x-position.
+ * @returns {void}
+ */
 function placeChicken(enemies, minX, maxX) {
   const chicken = new Chicken();
   chicken.x = minX + Math.random() * (maxX - minX);
   enemies.push(chicken);
 }
 
+/**
+ * Adds a small chicken at a random position inside a zone.
+ * @param {MovableObjects[]} enemies Enemy list to mutate.
+ * @param {number} minX Minimum x-position.
+ * @param {number} maxX Maximum x-position.
+ * @returns {void}
+ */
 function placeSmallChicken(enemies, minX, maxX) {
   const chicken = new SmallChicken();
   chicken.x = minX + Math.random() * (maxX - minX);
   enemies.push(chicken);
 }
 
-// ─── Bottles ─────────────────────────────────────────────────────────────────
-// 12 Flaschen gleichmäßig über das Level verteilt, mehr Cluster vor dem Boss
-
+/**
+ * Creates bottle pickups distributed over the level.
+ * @returns {Bottle[]} Bottle pickups.
+ */
 function createBottles() {
   const zones = [
     [280, 420],
@@ -67,9 +85,10 @@ function createBottles() {
   return zones.map(([min, max]) => new Bottle(min + Math.random() * (max - min)));
 }
 
-// ─── Coins ───────────────────────────────────────────────────────────────────
-// 12 Münzen gleichmäßig über das Level verteilt
-
+/**
+ * Creates coin pickups distributed over the level.
+ * @returns {Coin[]} Coin pickups.
+ */
 function createCoins() {
   const count = 12;
   const levelWidth = 1900;
@@ -81,14 +100,18 @@ function createCoins() {
   });
 }
 
-// ─── Clouds ──────────────────────────────────────────────────────────────────
-
+/**
+ * Creates background clouds.
+ * @returns {Cloud[]} Cloud objects.
+ */
 function createClouds() {
   return Array.from({ length: 8 }, () => new Cloud());
 }
 
-// ─── Background ──────────────────────────────────────────────────────────────
-
+/**
+ * Creates the repeated parallax background layers.
+ * @returns {BackgroundObject[]} Background objects in draw order.
+ */
 function createBackgroundObjects() {
   return [
     new BackgroundObject("../assets/img/5_background/layers/air.png", -719),

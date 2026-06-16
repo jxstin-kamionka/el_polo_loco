@@ -1,0 +1,36 @@
+.difficulty-btn {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 132px;
+  height: 42px;
+  padding: 0 16px;
+  border: 2px solid #ffd400;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.72);
+  color: #ffd400;
+  font-family: Center, sans-serif;
+  font-size: 15px;
+  letter-spacing: 0;
+}
+
+.difficulty-btn:hover {
+  background: rgba(255, 212, 0, 0.2);
+  transform: translateX(-50%) scale(1.05);
+}
+
+.difficulty-btn[data-difficulty="easy"] {
+  border-color: #74d680;
+  color: #74d680;
+}
+
+.difficulty-btn[data-difficulty="normal"] {
+  border-color: #ffd400;
+  color: #ffd400;
+}
+
+.difficulty-btn[data-difficulty="hard"] {
+  border-color: #ff6b4a;
+  color: #ff6b4a;
+}

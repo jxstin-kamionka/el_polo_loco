@@ -1,6 +1,11 @@
+/**
+ * Moving background cloud.
+ */
 class Cloud extends MovableObjects {
+  /** @type {?number} Movement interval id. */
   moveInterval = null;
 
+  /** @type {{top:number,bottom:number,left:number,right:number}} Collision offsets. */
   offset = {
     top: 0,
     bottom: 0,
@@ -8,6 +13,9 @@ class Cloud extends MovableObjects {
     right: 0,
   };
 
+  /**
+   * Creates a cloud with randomized position and speed.
+   */
   constructor() {
     super();
     this.loadImage("../assets/img/5_background/layers/4_clouds/1.png");
@@ -19,6 +27,10 @@ class Cloud extends MovableObjects {
     this.animate();
   }
 
+  /**
+   * Starts cloud movement.
+   * @returns {void}
+   */
   animate() {
     this.moveInterval = setInterval(() => {
       if (isPaused) return;
@@ -26,6 +38,10 @@ class Cloud extends MovableObjects {
     }, 1000 / 60);
   }
 
+  /**
+   * Stops cloud movement.
+   * @returns {void}
+   */
   stop() {
     if (this.moveInterval) {
       clearInterval(this.moveInterval);
